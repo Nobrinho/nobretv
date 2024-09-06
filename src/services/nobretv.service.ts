@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { MOVIE } from './shared/path-rest-constants'
-import { SERIE } from './shared/path-rest-constants'
+import { TV } from './shared/path-rest-constants'
 import type { MediaType } from '../types/MediaType'
+import type { AboutMediaType } from '@/types/AboutMediaType'
 
 
 
@@ -21,15 +22,21 @@ class NobreTvService {
     }
 
     async getAll(): Promise<MediaType> {
-        return this.axiosInstance.get('trending/all/day');
+        return this.axiosInstance.get('trending/all/day')
     }
 
     async getMovies(): Promise<MediaType> {
-        return this.axiosInstance.get(`discover${MOVIE}`);
+        return this.axiosInstance.get(`discover${MOVIE}`)
     }
 
     async getSeries(): Promise<MediaType> {
-        return this.axiosInstance.get(`/discover${SERIE}`);
+        return this.axiosInstance.get(`/discover${TV}`)
+    }
+    async getMovieById(id: number): Promise<AboutMediaType> {
+        return this.axiosInstance.get(`movie/${id}`)
+    }
+    async getSeriesById(id: number): Promise<AboutMediaType> {
+        return this.axiosInstance.get(`tv/${id}`)
     }
 }
 

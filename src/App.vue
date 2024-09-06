@@ -2,15 +2,11 @@
 import TopBar from './layout/TopBar.vue';
 </script>
 <template>
-  <TopBar />
-  <main>
-    <router-view />
-  </main>
+  <div class="main">
+    <TopBar />
+    <div>
+      <router-view />
+    </div>
+  </div>
 </template>
-<style scoped lang="css">
-main {
-  padding: 20px;
-  background-color: rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-}
-</style>
+<style lang="css"></style>
