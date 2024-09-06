@@ -84,6 +84,7 @@ export interface AboutMediaType {
     number_of_episodes: number;
     number_of_seasons: number;
     origin_country: string[];
+    original_title: string;
     original_language: string;
     original_name: string;
     overview: string;
