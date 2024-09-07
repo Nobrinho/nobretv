@@ -9,7 +9,7 @@
             <router-link to="/series">Séries</router-link>
         </div>
         <div class="basis-1/3 border-2 flex items-center justify-center">
-            Search
+            <router-link to="/favorites">Minha lista</router-link>
         </div>
     </nav>
 </template>

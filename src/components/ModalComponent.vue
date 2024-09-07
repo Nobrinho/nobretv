@@ -1,7 +1,8 @@
 <template>
     <div>
         <div v-if="props.disable" @click="openModal" class="flex item-center justify-center gap-2">
-            <button class="rounded-xl bg-gray-900 w-30 h-10 flex justify-center items-center gap-2 px-2 shadow">
+            <button
+                class="rounded-xl bg-gray-700 hover:bg-red-600 hover:scale-105 w-30 h-10 flex justify-center items-center gap-2 px-2 shadow">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                     <path fill-rule="evenodd"
                         d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"

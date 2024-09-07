@@ -5,6 +5,7 @@ import type { MediaType } from '../types/MediaType'
 import type { AboutMediaType } from '@/types/AboutMediaType'
 import type { AboutSerieType } from '@/types/AboutSerieType'
 import type { TrailerType } from '@/types/TrailerType'
+import type { RawBodyType } from '@/types/RawBodyType'
 
 
 
@@ -50,6 +51,14 @@ class NobreTvService {
     async getDataTrailer(movie_id: number): Promise<TrailerType> {
         return this.axiosInstance.get(`${MOVIE}/${movie_id}/videos`)
     }
+    async addToFavorites(acount_id: number, raw_body: RawBodyType): Promise<any> {
+        return this.axiosInstance.post(`/account/${acount_id}/favorite`, raw_body)
+    }
+    async getFavorites(acount_id: number): Promise<any> {
+        return this.axiosInstance.get(`/account/${acount_id}/favorite/movies`)
+    }
+    async getFavoritesSeries(acount_id: number): Promise<any> {
+        return this.axiosInstance.get(`/account/${acount_id}/favorite/tv`)
+    }
 }
-
 export default new NobreTvService()

@@ -4,12 +4,12 @@
       :style="`background-image: url(https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path})`">
     </div>
     <div class="absolute inset-0 bg-black opacity-70"></div>
-    <div class="relative grid grid-cols-4 text-white px-10 py-10 gap-4">
-      <div class="sm:col-span-4 md:col-span-1 lg:col-span-1 xl:col-span-1 flex justify-center max-w-[546px]">
+    <div class="relative grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-12 text-white px-10 py-10 gap-4">
+      <div class="sm:col-span-4 md:col-span-2 lg:col-span-2 xl:col-span-4 w-auto md:max-w-96 shadow">
         <img :src="`https://image.tmdb.org/t/p/original/${mediaInfo.poster_path}`" alt="poster"
-          class="w-full h-full col-span-1" />
+          class="w-full col-span-1" />
       </div>
-      <div class=" sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-3 text-3xl px-2">
+      <div class=" sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-6 text-3xl px-2">
         <p>{{ mediaInfo.name }} - {{ getYear(mediaInfo.first_air_date) }}</p>
         <div class="flex flex-wrap gap-2">
           <p class="text-lg">Lançamento: {{ formatDateBR(mediaInfo.first_air_date) }}</p>
@@ -25,17 +25,16 @@
           </div>
         </div>
         <div class="flex gap-4 mt-2">
-          <button class="rounded-full bg-gray-900 w-10 h-10 flex justify-center items-center shadow-md">
+          <button v-if="favorite" @click="addFavorite" class="rounded-full bg-gray-700 w-10 h-10 flex justify-center items-center shadow-md hover:bg-red-600 hover:scale-110
+            ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
               <path
                 d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
             </svg>
           </button>
         </div>
-        <div>
-          <div>
-            {{ mediaInfo.overview }}
-          </div>
+        <div class="italic text-2xl my-4">
+          {{ mediaInfo.overview }}
         </div>
       </div>
     </div>
@@ -43,14 +42,15 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import nobretvService from '@/services/nobretv.service';
-import type { AboutMediaType } from '@/types/AboutMediaType';
-import router from '@/router';
+import nobretvService from '@/services/nobretv.service'
+import type { AboutMediaType } from '@/types/AboutMediaType'
+import router from '@/router'
 
 const mediaInfo = ref({} as AboutMediaType)
 const id = Number(router.currentRoute.value.params.id)
 const trailer_key = ref('')
 const disableButton = ref(false)
+const favorite = ref(true)
 
 
 const getMediaById = async (id: number) => {
@@ -102,6 +102,38 @@ const getYear = (value: string) => {
   const year = date.getFullYear()
   return year
 }
+
+const addFavorite = () => {
+  const acount_id = 21501065
+  const payload = {
+    media_type: 'tv',
+    media_id: mediaInfo.value.id,
+    favorite: true
+  }
+  nobretvService.addToFavorites(acount_id, payload)
+    .then(() => {
+      favorite.value = true
+      isFavorite()
+    })
+    .catch((error) => {
+      console.error('Error adding favorite:', error)
+    })
+}
+
+const isFavorite = () => {
+  const acount_id = 21501065
+  nobretvService.getFavoritesSeries(acount_id)
+    .then((response) => {
+      const favorite_id = response.data.results.find((item: any) => item.id === mediaInfo.value.id)
+      if (favorite_id) {
+        favorite.value = false
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching favorites:', error)
+    })
+}
+isFavorite()
 
 
 
