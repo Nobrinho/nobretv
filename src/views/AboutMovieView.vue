@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="flex gap-4 mt-2">
-            <ModalTrailerComponent :trailer_key="trailer_key" :disable="disableButton" />
+            <ModalTrailerComponent :trailer_key="trailer_key" :disable="disableButton" v-if="trailer_key" />
             <button v-if="favorite" @click="addFavorite" class="rounded-full bg-gray-700 w-10 h-10 flex justify-center items-center shadow-md hover:bg-red-600 hover:scale-110
             ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">

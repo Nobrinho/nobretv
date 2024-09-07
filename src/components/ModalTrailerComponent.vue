@@ -52,6 +52,7 @@ const isModalOpen = ref(false)
 
 const openModal = () => {
     isModalOpen.value = true
+    trailer_url.value = `https://www.youtube.com/embed/${props.trailer_key}`
 }
 
 const closeModal = () => {
