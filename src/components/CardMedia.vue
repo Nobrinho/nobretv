@@ -15,13 +15,15 @@ import type { ResultType } from '@/types/ResultType'
 const router = useRouter()
 
 const navigateToView = () => {
-    const id = props.result.id
-    router.push('/view/' + id)
-};
+    const { id, media_type } = props.result;
+    const route = media_type === 'movie' ? '/movies/' : '/series/';
+    router.push(route + id);
+}
 const props = defineProps({
     result: {
         type: Object as () => ResultType,
         required: true
     }
 })
+
 </script>

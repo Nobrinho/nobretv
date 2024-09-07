@@ -64,8 +64,8 @@ interface SpokenLanguage {
     name: string
 }
 
-export interface AboutMediaType {
-    data: AboutMediaType
+export interface AboutSerieType {
+    data: AboutSerieType
     adult: boolean
     backdrop_path: string
     created_by: CreatedBy[]

@@ -18,7 +18,7 @@ const list = ref([] as ResultType[])
 const getMedias = async () => {
   try {
     const response = await nobretvService.getAll()
-    list.value = response.data.results.slice(0, 24)
+    list.value = response.data.results
   } catch (error) {
     console.error('Error fetching data:', error)
   }
