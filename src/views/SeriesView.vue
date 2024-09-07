@@ -7,22 +7,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import ContainerCard from '@/components/ContainerCard.vue'
 import CardMedia from '@/components/CardMedia.vue'
 import nobretvService from '@/services/nobretv.service'
 import type { ResultType } from '@/types/ResultType'
 
 const list = ref([] as ResultType[])
+const isLoading = ref(false)
+const page = ref(1)
 
 const getMedias = async () => {
+  if (isLoading.value) return
+  isLoading.value = true
   try {
-    const response = await nobretvService.getSeries()
-    list.value = response.data.results.slice(0, 24)
+    const response = await nobretvService.getAll(page.value)
+    list.value = [...list.value, ...response.data.results]
+    page.value++
   } catch (error) {
     console.error('Error fetching data:', error)
+  } finally {
+    isLoading.value = false
   }
 }
 
 getMedias()
+
+const handleScroll = () => {
+  const bottomOfWindow = window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 10
+  if (bottomOfWindow) {
+    getMedias()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+  getMedias()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>

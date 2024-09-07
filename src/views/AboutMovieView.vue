@@ -54,6 +54,7 @@ const id = Number(router.currentRoute.value.params.id)
 const trailer_key = ref('')
 const disableButton = ref(false)
 const favorite = ref(true)
+const page = ref(1)
 
 
 const getMediaById = async (id: number) => {
@@ -134,7 +135,7 @@ const addFavorite = () => {
 
 const isFavorite = () => {
   const acount_id = 21501065
-  nobretvService.getFavorites(acount_id)
+  nobretvService.getFavorites(acount_id, page.value)
     .then((response) => {
       const favorite_id = response.data.results.find((item: any) => item.id === mediaInfo.value.id)
       if (favorite_id) {

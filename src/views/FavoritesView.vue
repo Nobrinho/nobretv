@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import CardMedia from '@/components/CardMedia.vue'
 import nobretvService from '@/services/nobretv.service'
 import ContainerCard from '@/components/ContainerCard.vue'
@@ -27,22 +27,41 @@ const removedId = (id: number) => {
     showToast.value = false
   }, 1000)
 }
+const isLoading = ref(false)
+const page = ref(1)
 
 const getMedias = async () => {
   const account_id = 21501065
+  if (isLoading.value) return
+  isLoading.value = true
   try {
-    const response = await nobretvService.getFavorites(account_id)
-    list.value.push(...response.data.results)
+    const [response, responseSeries] = await Promise.all([
+      nobretvService.getFavorites(account_id, page.value),
+      nobretvService.getFavoritesSeries(account_id, page.value)
+    ])
+    list.value = [...list.value, ...response.data.results, ...responseSeries.data.results]
+    page.value += 2
   } catch (error) {
     console.error('Error fetching data:', error)
-  }
-
-  try {
-    const response = await nobretvService.getFavoritesSeries(account_id)
-    list.value.push(...response.data.results)
-  } catch (error) {
-    console.error('Error fetching data:', error)
+  } finally {
+    isLoading.value = false
   }
 }
 getMedias()
+
+const handleScroll = () => {
+  const bottomOfWindow = window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 10
+  if (bottomOfWindow) {
+    getMedias()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+  getMedias()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>

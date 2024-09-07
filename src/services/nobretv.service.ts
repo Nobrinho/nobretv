@@ -33,14 +33,14 @@ class NobreTvService {
         })
     }
 
-    async getAll(): Promise<MediaType> {
-        return this.axiosInstance.get('trending/all/day')
+    async getAll(page: number): Promise<MediaType> {
+        return this.axiosInstance.get(`trending/all/day?page=${page}`)
     }
-    async getMovies(): Promise<MediaType> {
-        return this.axiosInstance.get(`trending${MOVIE}/day`)
+    async getMovies(page: number): Promise<MediaType> {
+        return this.axiosInstance.get(`trending${MOVIE}/day?page=${page}`)
     }
-    async getSeries(): Promise<MediaType> {
-        return this.axiosInstance.get(`/trending${TV}/day`)
+    async getSeries(page: number): Promise<MediaType> {
+        return this.axiosInstance.get(`/trending${TV}/day?page=${page}`)
     }
     async getMovieById(movie_id: number): Promise<AboutMediaType> {
         return this.axiosInstance.get(`${MOVIE}/${movie_id}`)
@@ -54,11 +54,11 @@ class NobreTvService {
     async addToFavorites(acount_id: number, raw_body: RawBodyType): Promise<any> {
         return this.axiosInstance.post(`/account/${acount_id}/favorite`, raw_body)
     }
-    async getFavorites(acount_id: number): Promise<any> {
-        return this.axiosInstance.get(`/account/${acount_id}/favorite/movies`)
+    async getFavorites(acount_id: number, page: number): Promise<any> {
+        return this.axiosInstance.get(`/account/${acount_id}/favorite/movies?page=${page}`)
     }
-    async getFavoritesSeries(acount_id: number): Promise<any> {
-        return this.axiosInstance.get(`/account/${acount_id}/favorite/tv`)
+    async getFavoritesSeries(acount_id: number, page: number): Promise<any> {
+        return this.axiosInstance.get(`/account/${acount_id}/favorite/tv?page=${page}`)
     }
 }
 export default new NobreTvService()
