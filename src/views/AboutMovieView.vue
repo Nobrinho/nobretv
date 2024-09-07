@@ -148,3 +148,10 @@ const isFavorite = () => {
 }
 isFavorite()
 </script>
+<style scoped>
+@media (max-width: 640px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+</style>
