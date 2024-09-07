@@ -30,11 +30,18 @@
                     </path>
                 </svg>
             </button>
-            <transition name="fade" class="w-full bg-[#11171c] text-xl text-white text-center py-4 shadow-2xl">
-                <ul @click="showMenu = false" v-if="showMenu" class="absolute top-12 left-0 bg-white text-black z-50">
-                    <li class="hover:bg-[#18c6b3] mb-2"><router-link to="/">Em alta</router-link></li>
-                    <li class="hover:bg-[#18c6b3] mb-2"><router-link to="/movies">Filmes</router-link></li>
-                    <li class="hover:bg-[#18c6b3]"><router-link to="/series">Séries</router-link></li>
+            <transition name="fade" class="w-full text-xl text-white text-center py-4 shadow-2xl">
+                <ul @click="showMenu = false" v-if="showMenu"
+                    class="absolute top-12 left-0 bg-[#11171c] text-black z-50">
+                    <router-link to="/">
+                        <li class="hover:bg-[#18c6b3] mb-2">Em alta</li>
+                    </router-link>
+                    <router-link to="/movies">
+                        <li class="hover:bg-[#18c6b3] mb-2">Filmes</li>
+                    </router-link>
+                    <router-link to="/series">
+                        <li class="hover:bg-[#18c6b3] mb-2">Séries</li>
+                    </router-link>
                 </ul>
             </transition>
         </div>
