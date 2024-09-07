@@ -9,7 +9,7 @@
         <CardMedia @reload="removedId" :result="media" v-for="media in list" :key="media.id" />
       </ContainerCard>
       <div v-if="showToast"
-        class="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-opacity duration-300"
+        class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-opacity duration-300"
         @click="showToast = false">
         Favorito removido com sucesso!
       </div>

@@ -53,3 +53,4 @@ onUnmounted(() => {
 
 getMedias()
 </script>
+<style scoped></style>

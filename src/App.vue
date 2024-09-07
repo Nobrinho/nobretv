@@ -1,12 +1,18 @@
-<script setup lang="ts">
-import TopBar from './layout/TopBar.vue';
-</script>
 <template>
   <div class="main">
     <TopBar />
-    <div>
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
-<style lang="css"></style>
+
+<script setup lang="ts">
+import TopBar from './layout/TopBar.vue';
+</script>
+
+<style lang="css">
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+</style>
