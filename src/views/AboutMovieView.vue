@@ -44,6 +44,11 @@
       </div>
 
     </div>
+    <div v-if="showToast"
+      class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-opacity duration-300"
+      @click="showToast = false">
+      Favorito adicionado com sucesso!
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -62,6 +67,7 @@ const disableButton = ref(false)
 const favorite = ref(true)
 const page = ref(1)
 const firstLoading = ref(true)
+const showToast = ref(false)
 
 
 const getMediaById = async (id: number) => {
@@ -141,6 +147,11 @@ const addFavorite = () => {
     })
     .catch((error) => {
       console.error('Error adding favorite:', error)
+    }).finally(() => {
+      showToast.value = true
+      setTimeout(() => {
+        showToast.value = false
+      }, 1000)
     })
 }
 

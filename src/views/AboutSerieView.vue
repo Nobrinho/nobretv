@@ -1,44 +1,52 @@
 <template>
   <div class="realtive h-full">
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-      :style="`background-image: url(https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path})`">
-    </div>
-    <div class="absolute inset-0 bg-black opacity-70"></div>
-    <div class="relative grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-12 text-white px-10 py-10 gap-4">
-      <div class="sm:col-span-4 md:col-span-2 lg:col-span-2 xl:col-span-4 w-auto md:max-w-96 shadow">
-        <img :src="`https://image.tmdb.org/t/p/original/${mediaInfo.poster_path}`" alt="poster"
-          class="w-full col-span-1" />
+    <FirstLoadingComponent v-if="firstLoading" />
+    <div v-else>
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        :style="`background-image: url(https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path})`">
       </div>
-      <div class=" sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-6 text-3xl px-2">
-        <p>{{ mediaInfo.name }} - {{ getYear(mediaInfo.first_air_date) }}</p>
-        <div class="flex flex-wrap gap-2">
-          <p class="text-lg">Lançamento: {{ formatDateBR(mediaInfo.first_air_date) }}</p>
-          <div class="text-lg bg-gray-700 rounded shadow text-white px-2">{{ (mediaInfo.number_of_seasons)
-            }} temporada</div>
-          <div class="text-lg bg-gray-700 rounded shadow text-white px-2">{{ (mediaInfo.number_of_episodes)
-            }} episódios</div>
-          <div class="flex gap-2">
-            <div v-for="item in mediaInfo.genres" :key="item.id"
-              class="bg-gray-200 rounded shadow text-black text-lg px-2">
-              {{ item.name }}
+      <div class="absolute inset-0 bg-black opacity-70"></div>
+      <div class="relative grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-12 text-white px-10 py-10 gap-4">
+        <div class="sm:col-span-4 md:col-span-2 lg:col-span-2 xl:col-span-4 w-auto md:max-w-96 shadow">
+          <img :src="`https://image.tmdb.org/t/p/original/${mediaInfo.poster_path}`" alt="poster"
+            class="w-full col-span-1" />
+        </div>
+        <div class=" sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-6 text-3xl px-2">
+          <p>{{ mediaInfo.name }} - {{ getYear(mediaInfo.first_air_date) }}</p>
+          <div class="flex flex-wrap gap-2">
+            <p class="text-lg">Lançamento: {{ formatDateBR(mediaInfo.first_air_date) }}</p>
+            <div class="text-lg bg-gray-700 rounded shadow text-white px-2">{{ (mediaInfo.number_of_seasons)
+              }} temporada</div>
+            <div class="text-lg bg-gray-700 rounded shadow text-white px-2">{{ (mediaInfo.number_of_episodes)
+              }} episódios</div>
+            <div class="flex gap-2">
+              <div v-for="item in mediaInfo.genres" :key="item.id"
+                class="bg-gray-200 rounded shadow text-black text-lg px-2">
+                {{ item.name }}
+              </div>
             </div>
           </div>
-        </div>
-        <div class="flex gap-4 mt-2">
-          <button v-if="favorite" @click="addFavorite" class="rounded-full bg-gray-700 w-10 h-10 flex justify-center items-center shadow-md hover:bg-red-600 hover:scale-110
+          <div class="flex gap-4 mt-2">
+            <button v-if="favorite" @click="addFavorite" class="rounded-full bg-gray-700 w-10 h-10 flex justify-center items-center shadow-md hover:bg-red-600 hover:scale-110
             ">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-              <path
-                d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-            </svg>
-          </button>
-          <div class="w-10 h-10">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path
+                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+              </svg>
+            </button>
+            <div class="w-10 h-10">
+            </div>
+          </div>
+          <div class="italic text-2xl my-4">
+            {{ mediaInfo.overview }}
           </div>
         </div>
-        <div class="italic text-2xl my-4">
-          {{ mediaInfo.overview }}
-        </div>
       </div>
+    </div>
+    <div v-if="showToast"
+      class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg transition-opacity duration-300"
+      @click="showToast = false">
+      Favorito adicionado com sucesso!
     </div>
   </div>
 </template>
@@ -47,6 +55,7 @@ import { ref } from 'vue'
 import nobretvService from '@/services/nobretv.service'
 import type { AboutMediaType } from '@/types/AboutMediaType'
 import router from '@/router'
+import FirstLoadingComponent from '@/components/FirstLoadingComponent.vue'
 
 const mediaInfo = ref({} as AboutMediaType)
 const id = Number(router.currentRoute.value.params.id)
@@ -54,6 +63,8 @@ const trailer_key = ref('')
 const disableButton = ref(false)
 const favorite = ref(true)
 const page = ref(1)
+const showToast = ref(false)
+const firstLoading = ref(true)
 
 
 const getMediaById = async (id: number) => {
@@ -69,6 +80,8 @@ const getMediaById = async (id: number) => {
     mediaInfo.value = response.data
   } catch (error) {
     console.error('Error fetching data:', error)
+  } finally {
+    firstLoading.value = false
   }
 }
 
@@ -120,6 +133,11 @@ const addFavorite = () => {
     })
     .catch((error) => {
       console.error('Error adding favorite:', error)
+    }).finally(() => {
+      showToast.value = true
+      setTimeout(() => {
+        showToast.value = false
+      }, 1000)
     })
 }
 
