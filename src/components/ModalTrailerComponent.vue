@@ -10,12 +10,13 @@
                 </svg>
                 <p class="flex items-center text-lg">Assistir trailer</p>
             </button>
-
         </div>
         <div v-if="isModalOpen" class="fixed inset-0 flex items-center justify-center z-50">
-            <div class="bg-gray-900 p-6 rounded-xl shadow relative sm:w-full md:w-3/4 lg:w-4/4 xl:w-2/4 pt-6 px-0">
+            <div
+                class="bg-gray-900 p-6 rounded-xl shadow relative w-screen sm:w-full md:w-3/4 lg:w-4/4 xl:w-2/4 pt-6 px-0">
                 <div v-if="trailer_key" class="flex justify-center py-3">
-                    <div class="w-full aspect-w-16 aspect-h-9 sm:h-[26rem] md:h-[24rem] lg:h-[28rem] xl:h-[61rem]">
+                    <div
+                        class="w-full aspect-w-16 aspect-h-9 h-[17rem] sm:h-[26rem] md:h-[24rem] lg:h-[28rem] xl:h-[34rem]">
                         <iframe :src="trailer_url" frameborder="0" class="w-full h-full"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
