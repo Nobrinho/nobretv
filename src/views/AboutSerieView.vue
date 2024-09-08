@@ -59,6 +59,7 @@ import FirstLoadingComponent from '@/components/FirstLoadingComponent.vue'
 
 const mediaInfo = ref({} as AboutMediaType)
 const id = Number(router.currentRoute.value.params.id)
+console.log(id)
 const trailer_key = ref('')
 const disableButton = ref(false)
 const favorite = ref(true)
