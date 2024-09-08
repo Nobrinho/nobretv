@@ -6,13 +6,14 @@ import type { AboutMediaType } from '@/types/AboutMediaType'
 import type { AboutSerieType } from '@/types/AboutSerieType'
 import type { TrailerType } from '@/types/TrailerType'
 import type { RawBodyType } from '@/types/RawBodyType'
+import config from '@/config.json'
 
 
 
 
 class NobreTvService {
-    private bearer: string = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNzg0ZTdhMWYwMjJhN2VkZjMzZWIxYmFhMmFhNzNmYSIsIm5iZiI6MTcyNTQ5MDQxMy41Mzc5MjMsInN1YiI6IjY2ZDhlMDgzNzA5ZmJlYmU0MjFhYmYxNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ad3435cKP07ttCTev_wDNHWRttN0h_N4Wb8Lpxh2fuE'
-    private url: string = 'https://api.themoviedb.org/3'
+    private bearer: string = config.VITE_BEARER_TOKEN
+    private url: string = config.VITE_MOVIE_URL
     private axiosInstance
 
     constructor() {
