@@ -32,6 +32,8 @@ const navigateToView = () => {
     const { id, release_date } = props.result;
     const route = release_date ? '/movies/' : '/series/';
     router.push(route + id)
+    localStorage.removeItem('mediaId')
+    localStorage.setItem('mediaId', JSON.stringify(props.result.id))
 }
 const props = defineProps({
     result: {

@@ -54,12 +54,10 @@
 import { ref } from 'vue'
 import nobretvService from '@/services/nobretv.service'
 import type { AboutMediaType } from '@/types/AboutMediaType'
-import router from '@/router'
 import FirstLoadingComponent from '@/components/FirstLoadingComponent.vue'
 
 const mediaInfo = ref({} as AboutMediaType)
-const id = Number(router.currentRoute.value.params.id)
-console.log(id)
+const id = Number(localStorage.getItem('mediaId'))
 const trailer_key = ref('')
 const disableButton = ref(false)
 const favorite = ref(true)
