@@ -52,22 +52,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import nobretvService from '@/services/nobretv.service'
 import type { AboutMediaType } from '@/types/AboutMediaType'
 import ModalTrailerComponent from '@/components/ModalTrailerComponent.vue'
 import FirstLoadingComponent from '@/components/FirstLoadingComponent.vue'
-
-
-onMounted(() => {
-  if (sessionStorage.getItem('reloaded')) {
-    console.log('A página foi recarregada.')
-  } else {
-    console.log('A página foi carregada pela primeira vez.')
-    sessionStorage.setItem('reloaded', 'true')
-  }
-})
-
 
 const mediaInfo = ref({} as AboutMediaType)
 const id = Number(localStorage.getItem('mediaId'))
@@ -80,16 +69,13 @@ const showToast = ref(false)
 
 
 const getMediaById = async (id: number) => {
-  console.log('iniico');
   try {
     let response
     response = await nobretvService.getMovieById(id)
     mediaInfo.value = response.data
-    console.log('meio');
   } catch (error) {
     console.error('Error fetching data:', error)
   } finally {
-    console.log('fim');
     firstLoading.value = false
   }
 }
