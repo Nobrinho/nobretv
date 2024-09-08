@@ -68,15 +68,9 @@ const firstLoading = ref(true)
 
 
 const getMediaById = async (id: number) => {
-  const { name } = router.currentRoute.value
-
   try {
     let response
-    if (name === 'movies-view') {
-      response = await nobretvService.getMovieById(id)
-    } else {
-      response = await nobretvService.getSerieById(id)
-    }
+    response = await nobretvService.getSerieById(id)
     mediaInfo.value = response.data
   } catch (error) {
     console.error('Error fetching data:', error)
