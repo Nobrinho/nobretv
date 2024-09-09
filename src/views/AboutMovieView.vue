@@ -17,7 +17,7 @@
             <p class="text-lg">Lançamento: {{ formatDateBR(mediaInfo.release_date) }}</p>
             <div class="text-lg bg-gray-700 rounded shadow text-white px-2">{{ convertMinutesToHours(mediaInfo.runtime)
               }}</div>
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-wrap">
               <div v-for="item in mediaInfo.genres" :key="item.id"
                 class="bg-gray-200 rounded shadow text-black text-lg px-2">
                 {{ item.name }}

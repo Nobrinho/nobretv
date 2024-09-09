@@ -52,6 +52,9 @@ class NobreTvService {
     async getDataTrailer(movie_id: number): Promise<TrailerType> {
         return this.axiosInstance.get(`${MOVIE}/${movie_id}/videos`)
     }
+    async getDataTrailerSeries(serie_id: number): Promise<TrailerType> {
+        return this.axiosInstance.get(`${TV}/${serie_id}/videos`)
+    }
     async addToFavorites(acount_id: number, raw_body: RawBodyType): Promise<any> {
         return this.axiosInstance.post(`/account/${acount_id}/favorite`, raw_body)
     }

@@ -19,7 +19,7 @@
               }} temporada</div>
             <div class="text-lg bg-gray-700 rounded shadow text-white px-2">{{ (mediaInfo.number_of_episodes)
               }} episódios</div>
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-wrap">
               <div v-for="item in mediaInfo.genres" :key="item.id"
                 class="bg-gray-200 rounded shadow text-black text-lg px-2">
                 {{ item.name }}
@@ -27,6 +27,7 @@
             </div>
           </div>
           <div class="flex gap-4 mt-2">
+            <ModalTrailerComponent :trailer_key="trailer_key" :disable="disableButton" v-if="trailer_key" />
             <button v-if="favorite" @click="addFavorite" class="rounded-full bg-gray-700 w-10 h-10 flex justify-center items-center shadow-md hover:bg-red-600 hover:scale-110
             ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -55,6 +56,7 @@ import { ref } from 'vue'
 import nobretvService from '@/services/nobretv.service'
 import type { AboutMediaType } from '@/types/AboutMediaType'
 import FirstLoadingComponent from '@/components/FirstLoadingComponent.vue'
+import ModalTrailerComponent from '@/components/ModalTrailerComponent.vue'
 
 const mediaInfo = ref({} as AboutMediaType)
 const id = Number(localStorage.getItem('mediaId'))
@@ -80,7 +82,7 @@ const getMediaById = async (id: number) => {
 
 const getTrailer = async () => {
   try {
-    const response = await nobretvService.getDataTrailer(id)
+    const response = await nobretvService.getDataTrailerSeries(id)
     const trailer = response.data.results.find((item: any) => item.type === 'Trailer' && item.site === 'YouTube')
     if (trailer) {
       trailer_key.value = trailer.key
