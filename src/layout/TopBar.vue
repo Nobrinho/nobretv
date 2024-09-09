@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="hidden md:flex flex-col md:flex-row py-3 font-bold font-sans text-xl text-white mb-10 divide-x divide-teal-300 border-b-2 border-teal-300">
+        class="hidden md:flex flex-col md:flex-row py-3 font-bold font-sans text-xl text-white divide-x divide-teal-300 border-b-2 border-teal-300">
         <div class="md:w-1/3 flex justify-center items-center">
             <img :src="logo" alt="">
         </div>
@@ -14,7 +14,7 @@
             <router-link to="/favorites" class="hover:text-teal-300">Minha lista</router-link>
         </div>
     </nav>
-    <div class="flex justify-between items center bg-[#11171c] h-16 w-full px-4 md:hidden shadow-2xl mb-6">
+    <div class="flex justify-between items center bg-[#11171c] h-16 w-full px-4 md:hidden shadow-2xl">
         <div class="flex items-center">
             <button v-if="!showMenu" class="text-white shadow-2xl" @click="showMenu = true">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -57,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-/* import { RouterLink } from 'vue-router' */
 import { ref } from 'vue'
 import FavoriteIcon from '@/assets/icons/FavoriteIcon.vue'
 import logo from '@/assets/NobreTV2.svg'
@@ -76,6 +75,5 @@ const showMenu = ref(false)
 
 .router-link-active {
     color: #18c6b3;
-    /* Cor quando a rota está ativa */
 }
 </style>
