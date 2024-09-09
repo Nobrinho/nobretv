@@ -4,7 +4,7 @@
             class=" relative rounded shadow-lg w-full sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-5/5 transform transition-transform duration-200 hover:scale-105">
             <img :src="`https://image.tmdb.org/t/p/original/${props.result.poster_path}`" alt="media-poster"
                 class="w-full h-auto rounded-t">
-            <button v-if="hover && routeName === 'favorites'"
+            <button v-if="routeName === 'favorites'"
                 class="absolute top-0 right-0 shadow-lg p-2 bg-red-600 text-white hover:border-red-600 hover:bg-white hover:text-red-600"
                 @click.stop="removeFavorites">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"

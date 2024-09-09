@@ -14,7 +14,8 @@
             <router-link to="/favorites" class="hover:text-teal-300">Minha lista</router-link>
         </div>
     </nav>
-    <div class="flex justify-between items center bg-[#11171c] h-16 w-full px-4 md:hidden shadow-2xl">
+    <div
+        class="flex justify-between items center bg-[#11171c] h-16 w-full px-4 md:hidden shadow-2xl border-b-2 border-teal-300">
         <div class="flex items-center">
             <button v-if="!showMenu" class="text-white shadow-2xl" @click="showMenu = true">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
